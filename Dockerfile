@@ -14,23 +14,11 @@ RUN apk add --no-cache --update alpine-sdk \
 &&  make \
 &&  make install tags="signrpc walletrpc chainrpc invoicesrpc routerrpc"
 
-# Start a new, final image.
-FROM alpine as final
+WORKDIR /go/src/github.com/lightningnetwork/lnd
 
-# Define a root volume for data persistence.
-VOLUME /root/.lnd
-
-# Add bash and ca-certs, for quality of life and SSL-related reasons.
-RUN apk --no-cache add \
-    bash \
-    ca-certificates
-
-# Copy the binaries from the builder image.
-COPY --from=builder /go/bin/lncli /bin/
-COPY --from=builder /go/bin/lnd /bin/
+COPY lnrpc/rpc.pb.go lnrpc_client/
 
 # Expose lnd ports (p2p, rpc).
-EXPOSE 9735 10009
+EXPOSE 9736 10008
 
-# Specify the start command and entrypoint as the lnd daemon.
-ENTRYPOINT ["lnd"]
+CMD ["lnd"]
