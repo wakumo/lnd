@@ -8,15 +8,16 @@ ENV GODEBUG netdns=cgo
 RUN apk add --no-cache --update alpine-sdk \
     git \
     make \
-    gcc \
-&&  git clone https://github.com/lightningnetwork/lnd /go/src/github.com/lightningnetwork/lnd \
-&&  cd /go/src/github.com/lightningnetwork/lnd \
-&&  make \
-&&  make install tags="signrpc walletrpc chainrpc invoicesrpc routerrpc"
+    gcc
 
-WORKDIR /go/src/github.com/lightningnetwork/lnd
+COPY . /go/src/github.com/wakumo/lnd/
 
-COPY lnrpc/rpc.pb.go lnrpc_client/
+WORKDIR /go/src/github.com/wakumo/lnd
+
+RUN make \
+ && make install tags="signrpc walletrpc chainrpc invoicesrpc routerrpc"
+
+COPY lnrpc/rpc.pb.go lnrpc_client/lnrpc/lnrpc/
 
 # Expose lnd ports (p2p, rpc).
 EXPOSE 9736 10008
