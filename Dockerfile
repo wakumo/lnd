@@ -10,9 +10,9 @@ RUN apk add --no-cache --update alpine-sdk \
     make \
     gcc
 
-COPY . /go/src/github.com/wakumo/lnd/
+COPY . /go/src/github.com/lightningnetwork/lnd/
 
-WORKDIR /go/src/github.com/wakumo/lnd
+WORKDIR /go/src/github.com/lightningnetwork/lnd
 
 RUN make \
  && make install tags="signrpc walletrpc chainrpc invoicesrpc routerrpc"

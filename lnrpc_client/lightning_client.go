@@ -10,7 +10,7 @@ import (
 	"github.com/lightningnetwork/lnd/lnrpc_client/lnrpc"
 
 	"github.com/joho/godotenv"
-	"github.com/wakumo/lnd/macaroons"
+	"github.com/lightningnetwork/lnd/macaroons"
 	"gopkg.in/macaroon.v2"
 
 	"google.golang.org/grpc"
