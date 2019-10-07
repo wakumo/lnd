@@ -76,7 +76,7 @@ func main() {
 			grpc.WithBlock(),
 		}
 
-		conn, err := grpc.Dial("localhost:10009", opts...)
+		conn, err := grpc.Dial("localhost:10008", opts...)
 		if err != nil {
 			fmt.Println("cannot dial to lnd", err)
 			return
@@ -112,7 +112,7 @@ func main() {
 		grpc.WithPerRPCCredentials(macaroons.NewMacaroonCredential(mac)),
 	}
 
-	conn, err := grpc.Dial("localhost:10009", opts...)
+	conn, err := grpc.Dial("localhost:10008", opts...)
 	if err != nil {
 		fmt.Println("cannot dial to lnd", err)
 		return
