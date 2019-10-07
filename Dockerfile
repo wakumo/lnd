@@ -17,7 +17,7 @@ WORKDIR /go/src/github.com/lightningnetwork/lnd
 RUN make \
  && make install tags="signrpc walletrpc chainrpc invoicesrpc routerrpc"
 
-COPY lnrpc/rpc.pb.go lnrpc_client/lnrpc/lnrpc/
+COPY lnrpc/rpc.pb.go lnrpc_client/lnrpc/
 
 # Expose lnd ports (p2p, rpc).
 EXPOSE 9736 10008
