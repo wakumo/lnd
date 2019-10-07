@@ -26,7 +26,11 @@ func TestRequestRoute(t *testing.T) {
 
 		path := []*channeldb.ChannelEdgePolicy{
 			{
-				Node: &channeldb.LightningNode{},
+				Node: &channeldb.LightningNode{
+					Features: lnwire.NewFeatureVector(
+						nil, nil,
+					),
+				},
 			},
 		}
 
@@ -41,6 +45,11 @@ func TestRequestRoute(t *testing.T) {
 	}
 
 	session := &paymentSession{
+		getBandwidthHints: func() (map[uint64]lnwire.MilliSatoshi,
+			error) {
+
+			return nil, nil
+		},
 		sessionSource: sessionSource,
 		pathFinder:    findPath,
 	}
